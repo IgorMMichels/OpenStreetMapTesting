@@ -1,20 +1,28 @@
-Title: Architecture overview for OpenStreetMapTesting (Vue migration)
+# Architecture Overview
 
-Summary:
-- Current app is a pair of static HTML pages using Leaflet for mapping.
-- Migration plan introduces a new Vue 3 + Vite app to componentize UI and enable future enhancements.
-- Core map component will encapsulate Leaflet initialization, theming (roads light vs satellite), and geolocation.
+This document describes the high-level architecture of the Vue application and its interactions with services.
 
-High-level components:
-- MapView.vue: Leaflet map wrapper with base layers and layer control.
-- App.vue: Simple container hosting MapView and header.
-- Shared assets: Leaflet CSS via CDN in scaffold.
+## Overview
+- Client: Vue 3 SPA using Vue Router and a central state store (Vuex/Pinia).
+- API Layer: REST/GraphQL endpoints consumed by the client.
+- Authentication: Token-based authentication with session management.
+- Build & Deployment: Vite (or chosen bundler) with environment-based configurations.
 
-Data flow:
-- Map tiles come from external tile services (OpenStreetMap roads, Esri satellite).
-- Geolocation uses browser API to center the map.
-- No server API calls in the current implementation; the Vue map consumes tile layers only.
+## Key Components
+- Router: Defines all routes, guards, and lazy-loaded modules.
+- Store: Manages shared state with modules, actions, mutations, and getters.
+- Components: Reusable UI elements composed into pages/views.
+- Services: API clients, auth helpers, and utility services.
+- Theming: Central theme tokens for colors, typography, and spacing.
 
-Migration risks:
-- Dependency availability (Leaflet, Carto tiles) and CSP if hosting on restricted domains.
-- Migration footprint: keep existing static pages until Vue app is validated.
+## Data Flow
+- User interacts with UI; actions dispatch to store; store communicates with API services; API responses update state and UI rerenders.
+- Error handling propagates to UI via centralized notification system.
+
+## Non-Functional Aspects
+- Security: Proper handling of tokens, CORS, and input validation.
+- Performance: Lazy loading routes, code-splitting, and memoization where applicable.
+- Accessibility: ARIA roles and semantic HTML where appropriate.
+
+## Deployment Model
+- Environment-specific configurations (dev/stage/prod), feature flags, and build optimizations.
