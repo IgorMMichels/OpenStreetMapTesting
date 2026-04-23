@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenStreetMap Testing - Vue</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+      html, body, #app {
+        height: 100%;
+        margin: 0;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        padding: 8px 12px;
+        background: #2d3a50;
+        color: white;
+        font-family: sans-serif;
+      }
+      main {
+        flex: 1;
+        position: relative;
+      }
+      .map-container {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+  </html>
